@@ -4,8 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -13,10 +15,18 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Navigation;
+import Model.User;
 
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -25,7 +35,8 @@ public class Login_GUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldName;
-	private JTextField textFieldPass;
+	private JPasswordField textFieldPass;
+	private JButton btnLogin;
 
 	/**
 	 * Launch the application.
@@ -47,7 +58,6 @@ public class Login_GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_GUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 930, 980);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -85,6 +95,7 @@ public class Login_GUI extends JFrame {
 		panelInputName.add(lblIconName, BorderLayout.WEST);
 		
 		textFieldName = new JTextField();
+		textFieldName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldName.setBorder(null);
 		panelInputName.add(textFieldName, BorderLayout.CENTER);
 		textFieldName.setBackground(new Color(190, 127, 80));
@@ -103,7 +114,8 @@ public class Login_GUI extends JFrame {
 		lblIconLock.setBounds(new Rectangle(5, 0, 50, 40));
 		panelInputPass.add(lblIconLock, BorderLayout.WEST);
 		
-		textFieldPass = new JTextField();
+		textFieldPass = new JPasswordField();
+		textFieldPass.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldPass.setBorder(null);
 		textFieldPass.setBackground(new Color(190, 127, 80));
 		panelInputPass.add(textFieldPass, BorderLayout.CENTER);
@@ -119,7 +131,7 @@ public class Login_GUI extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNewLabel.setBounds(641, 572, 265, 37);
 		contentPane.add(lblNewLabel);
-		JButton btnLogin = new JButton("ĐĂNG NHẬP");
+		btnLogin = new JButton("ĐĂNG NHẬP");
 		btnLogin.setForeground(new Color(255, 0, 0));
 		btnLogin.setBackground(new Color(255, 255, 255));
 		btnLogin.setOpaque(true);
@@ -130,4 +142,34 @@ public class Login_GUI extends JFrame {
 		btnLogin.addActionListener(ac);
 		contentPane.add(btnLogin);
 	}
+	
+	public void readFile(ArrayList<User> listUser) {
+		ObjectInputStream ois = null;
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(new File("user.txt"));
+		    ois = new ObjectInputStream(fis);
+		    
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		} finally {
+		    if(ois != null){
+		        try {
+		        	ois.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    } 
+		}
+	}
+	
+	public boolean checkAccount() {
+		if(textFieldName.equals("") && textFieldPass.equals("")) {
+			JOptionPane.showMessageDialog(contentPane, "Vui lòng nhập đầy đủ thông tin");
+		}
+		return true;
+	}
+	
+	
 }

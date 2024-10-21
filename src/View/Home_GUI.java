@@ -43,11 +43,11 @@ public class Home_GUI extends JFrame {
 	 */
 	public Home_GUI() {
 		setBounds(new Rectangle(0, 0, 1920, 1080));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBounds(new Rectangle(0, 0, 1920, 1080));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,9 @@ public class Home_GUI extends JFrame {
 		lblTitleMng.setBounds(0, 0, 1540, 267);
 		contentPane.add(lblTitleMng);
 		
-		JButton btnMenu = new JButton("Menu");
+		ImageIcon bgMenu = new ImageIcon("/img/btnMenuBG.png");
+		JButton btnMenu = new JButton("Menu", bgMenu);
+		btnMenu.setBackground(new Color(255, 255, 255));
 		btnMenu.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		btnMenu.setBounds(385, 277, 383, 253);
 		btnMenu.setFocusPainted(false);
@@ -73,6 +75,7 @@ public class Home_GUI extends JFrame {
 		
 		
 		JButton btnOrder = new JButton("Order");
+		btnOrder.setBackground(new Color(255, 255, 255));
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		btnOrder.setBounds(800, 277, 383, 253);
 		btnOrder.setFocusPainted(false);
@@ -81,6 +84,7 @@ public class Home_GUI extends JFrame {
 		contentPane.add(btnOrder);
 		
 		JButton btnNV = new JButton("Nhân viên");
+		btnNV.setBackground(new Color(255, 255, 255));
 		btnNV.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		btnNV.setBounds(385, 563, 383, 253);
 		btnNV.setFocusPainted(false);
@@ -89,6 +93,7 @@ public class Home_GUI extends JFrame {
 		contentPane.add(btnNV);
 		
 		JButton btnThongKe = new JButton("Thống kê");
+		btnThongKe.setBackground(new Color(255, 255, 255));
 		btnThongKe.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		btnThongKe.setBounds(800, 563, 383, 253);
 		btnThongKe.setFocusPainted(false);
